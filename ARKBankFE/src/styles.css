@@ -1,0 +1,7 @@
+body{
+    display: grid;
+    height: 100%;
+    width: 100%;
+    background-image: url(assets/img/hector-j-rivas-1FxMET2U5dU-unsplash.jpg);
+    background-size: cover;
+  }

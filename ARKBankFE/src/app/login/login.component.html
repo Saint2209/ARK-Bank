@@ -1,0 +1,20 @@
+<div class="login-page">
+    <div class="form" [formGroup]="form">
+        <div class="login100-form-title" style="background-image: url(../../assets/img/krakenimages-376KN_ISplE-unsplash.jpg);">
+            <span class="login100-form-title-1">
+                Sign In
+            </span>
+        </div>
+        <!-- Remove the unnecessary inner <form> -->
+        <input type="number" formControlName="accountNumber" placeholder="Account Number" (change)="checkAccountNumberValidity()" />
+
+        <!-- Display a notification if the account number is invalid -->
+        <div *ngIf="!accountNumberValid" class="notification">
+            Invalid account number. Please enter a 6-digit non-negative number.
+        </div>
+        <input type="password" formControlName="password" placeholder="password" />
+        <button (click)="login()" [disabled]="!form.valid">login</button>
+        <!-- {{form.value | json}}
+        {{form.valid | json}} -->
+    </div>
+</div>

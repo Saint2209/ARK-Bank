@@ -1,0 +1,128 @@
+<!-- users-page.components.html -->
+
+<head>
+    <title>ARK TRANSACT</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<div id="container">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">ARK-Bank</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a data-toggle="tab" href="#home">Balance</a></li>
+                <li><a data-toggle="tab" href="#trans">Transfer</a></li>
+                <li><a data-toggle="tab" href="#menu1">Debit Order</a></li>
+                <li><a data-toggle="tab" href="#menu2">Transaction History</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a (click)="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div class="tab-content">
+    <!-- Balances -->
+    <div id="home" class="tab-pane fade in active form bank">
+        <h3 style="font-weight: bolder;">Balance</h3>
+        <p>Your current balance is <strong>${{balance}}</strong></p>
+    </div>
+    <!-- Transfer -->
+    <div id="trans" class="tab-pane fade form bank">
+        <div id="send-container" class="text-center">
+            <form [formGroup]="transactForm" (ngSubmit)="transact()">
+                <div class="login100-form-title">
+                    <span class="login100-form-title-1">Transact</span>
+                </div>
+                <div class="form-group">
+                    <label for="receiverAccountNumber">Account Number:</label>
+                    <input type="number" class="form-control" id="receiverAccountNumber"
+                        formControlName="receiverAccountNumber" required />
+                </div>
+                <div class="form-group">
+                    <label for="amount">Transfer($):</label>
+                    <input type="number" class="form-control" id="amount" formControlName="amount" required />
+                    <div *ngIf="transactForm.get('amount')?.hasError('min') && transactForm.get('amount')?.touched">
+                        Minimum transfer amount is $50.00.
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <!-- {{transactForm.valid}}
+            {{transactForm.value|json}} -->
+        </div>
+    </div>
+    <!-- Debit Order -->
+    <div id="menu1" class="tab-pane fade bank">
+        <div id="send-container" class="text-center">
+            <form [formGroup]="debitOrderForm" (ngSubmit)="debitOrder()" class="form">
+                <div class="login100-form-title">
+                    <span class="login100-form-title-1">
+                        Debit Order
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="accountNumber">Account Number:</label>
+                    <input type="number" class="form-control" formControlName="accountNumber" id="accountNumber"
+                        pattern="\d{6}" required>
+                </div>
+                <div class="form-group">
+                    <label for="amountToBeDebited">Transfer($):</label>
+                    <input type="number" class="form-control" formControlName="amountToBeDebited" id="amountToBeDebited"
+                        min="1" required>
+                    <div
+                        *ngIf="debitOrderForm.get('amountToBeDebited')?.hasError('min') && debitOrderForm.get('amountToBeDebited')?.touched">
+                        Minimum transfer amount is $50.00.
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <!-- {{debitOrderForm.valid}}
+            {{debitOrderForm.value|json}} -->
+        </div>
+    </div>
+
+    <!-- Transaction History -->
+    <div id="menu2" class="tab-pane fade bank form">
+        <div id="send-container" class="text-center">
+            <div class="login100-form-title">
+                <span class="login100-form-title-1">
+                    Transaction History
+                </span>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Debit</th>
+                            <th>credit</th>
+                            <th>Date</th>
+                            <!-- Add more header columns as needed -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let transaction of transactionHistory">
+                            <td>{{ transaction.debit | currency }}</td>
+                            <td>{{ transaction.credit | currency }}</td>
+                            <td>{{ transaction.transactionDate | date }}</td>
+                            <!-- Add more cells with transaction data as needed -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+    function confirmSubmit() {
+        return confirm("Are you sure you want to submit?");
+    }
+</script>

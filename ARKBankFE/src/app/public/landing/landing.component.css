@@ -1,0 +1,23 @@
+#container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    flex-direction: column;
+    gap: 50px;
+    h1 {
+        margin: 0px;
+        color: skyblue !important;
+        font-weight: bolder;
+    }
+
+    button {
+        background-color: black;
+        color: turquoise;
+        border: 0px;
+        font-size: 20px;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+}
