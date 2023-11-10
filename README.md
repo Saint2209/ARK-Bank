@@ -31,13 +31,13 @@ Make sure you have the following installed:
 2. Build and run the Java application:
 
    ```bash
-   ./mvnw spring-boot:run
+   ./mvn spring-boot:run
    ```
 
    or if you are on Windows:
 
    ```bash
-   mvnw spring-boot:run
+   mvn spring-boot:run
    ```
 
    This will start the backend server at `http://localhost:8080`.

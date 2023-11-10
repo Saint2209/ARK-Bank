@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 @Service
 public class BankService {
 
+    //Auto pulls repo
     @Autowired
     private BankAccountRepository bankAccountRepository;
 
@@ -132,6 +133,7 @@ public class BankService {
         creditBalance(receiverAccountNumber, amount);
     }
 
+    
     public void authenticateUser(Integer accountNumber, String password) {
         Optional<BankAccount> optionalAccount = bankAccountRepository.findByAccountNumberAndPassword(accountNumber,
                 password);
@@ -143,6 +145,7 @@ public class BankService {
         // Authentication successful
     }
 
+    @Transactional
     public BankAccount storeSessionId(Integer accountNumber, String sessionId) {
         BankAccount bankAccount = bankAccountRepository.findById(accountNumber)
                 .orElseThrow(() -> new RuntimeException("Bank account not found"));

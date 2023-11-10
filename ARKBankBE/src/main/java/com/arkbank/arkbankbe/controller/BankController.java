@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 
+//Define control layer containing api end-points
 @RestController
 @RequestMapping("/banking")
 @CrossOrigin(origins = "http://localhost:4200/")
@@ -34,8 +35,6 @@ public class BankController {
             Integer senderAccountNumber = Integer.parseInt(request.get("senderAccountNumber").toString());
             Integer receiverAccountNumber = Integer.parseInt(request.get("receiverAccountNumber").toString());
             Long amountToBeDebited = Long.parseLong(request.get("amountToBeDebited").toString());
-
-            // Validate the extracted parameters if needed
 
             // Perform the recurring payment using the extracted parameters
             bankService.scheduleRecurringPayment(senderAccountNumber, receiverAccountNumber, amountToBeDebited);

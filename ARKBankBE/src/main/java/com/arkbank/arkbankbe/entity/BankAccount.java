@@ -6,11 +6,12 @@ import jakarta.persistence.Id;
 
 import java.sql.Date;
 
-@Entity
+//Entity is a database object
+@Entity 
 public class BankAccount {
-
+    //Name specifiers by using @column
     @Id
-    @Column(name = "ACCOUNT_NUMBER")
+    @Column(name = "ACCOUNT_NUMBER") 
     private Integer accountNumber;
 
     @Column(name = "PASSWORD", nullable = false)
