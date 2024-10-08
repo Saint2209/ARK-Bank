@@ -1,4 +1,4 @@
-```markdown
+
 # ARKBankBE - Backend for ARK-Bank
 
 ARKBankBE is the backend for the ARK-Bank website project, developed using Spring Boot.
